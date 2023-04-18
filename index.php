@@ -72,7 +72,26 @@
                 echo '<strong>Distance</strong>' . ": " . $item['distance_to_center'] . "<br><br>";
             }
         ?>
+
     <hr>
+
+    <div class="container my-3">
+        <form action="index.php" method="GET">
+
+            <div>
+                <label for="parking_filter">Show hotels with parking lot</label>
+                <div class="mt-3">
+                    <input type="checkbox" name="parking_filter" id="parking_filter" class="ml-3">
+                </div>
+            </div>
+
+            <input type="submit" value="Filter" class="my-3">
+
+        </form>
+    </div>
+
+    <hr>
+
     <div class="container my-5">
         <table class="table">
             <thead>
@@ -87,14 +106,17 @@
             <tbody class="table-secondary">
                 <?php 
                     foreach ($hotels as $item) {
-                        echo '<tr>';
-                            echo '<td>' . $item['name'] . '</td>';
-                            echo '<td>' . $item['description'] . '</td>';
-                            echo '<td>' . ($item['parking'] ? 'Y' : 'N') . '</td>';
-                            echo '<td>' . $item['vote'] . '</td>';
-                            echo '<td>' . $item['distance_to_center'] . '</td>';
-                        echo '</tr>';
-                    }
+                        // if ($_GET['parking_filter'] != 'on') {    
+                        if (!isset($_GET['parking_filter']) || (isset($_GET['parking_filter']) && $item['parking'])) {
+                            echo '<tr>';
+                                echo '<td class="table-danger">' . $item['name'] . '</td>';
+                                echo '<td>' . $item['description'] . '</td>';
+                                echo '<td class="table-danger">' . ($item['parking'] ? 'Y' : 'N') . '</td>';
+                                echo '<td>' . $item['vote'] . '</td>';
+                                echo '<td class="table-danger">' . $item['distance_to_center'] . '</td>';
+                            echo '</tr>';
+                        }    
+                }
                 ?>
             </tbody>
         </table>
