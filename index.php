@@ -1,4 +1,6 @@
 <?php
+    $colors = ['table-secondary', 'table-success', 'table-danger', 'table-warning', 'table-info'];
+
 
     $hotels = [
 
@@ -59,21 +61,48 @@
 </head>
 <body>
 
-<h1>Hotels</h1>
+    <h1 class="my-4">Hotels</h1>
 
-<?php 
+        <?php 
+            foreach ($hotels as $item) {
+                echo '<strong>Hotel Name</strong>' . ": " . $item['name'] . "<br>";
+                echo '<strong>Features</strong>' . ": " . $item['description'] . "<br>";
+                echo '<strong>Parking</strong>' . ": " . ($item['parking'] ? 'Y' : 'N') . "<br>";
+                echo '<strong>Rating</strong>' . ": " . $item['vote'] . "<br>";
+                echo '<strong>Distance</strong>' . ": " . $item['distance_to_center'] . "<br><br>";
+            }
+        ?>
+    <hr>
+    <div class="container my-5">
+        <table class="table">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">Hotel Name</th>
+                    <th scope="col">Features</th>
+                    <th scope="col">Parking</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Distance (km)</th>
+                </tr>
+            </thead>
+            <tbody class="table-secondary">
+                <?php 
+                    foreach ($hotels as $item) {
+                        echo '<tr>';
+                            echo '<td>' . $item['name'] . '</td>';
+                            echo '<td>' . $item['description'] . '</td>';
+                            echo '<td>' . ($item['parking'] ? 'Y' : 'N') . '</td>';
+                            echo '<td>' . $item['vote'] . '</td>';
+                            echo '<td>' . $item['distance_to_center'] . '</td>';
+                        echo '</tr>';
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
-foreach ($hotels as $item) {
-    echo '<strong>Hotel Name</strong>' . ": " . $item['name'] . "<br>";
-    echo '<strong>Features</strong>' . ": " . $item['description'] . "<br>";
-    echo '<strong>Parking</strong>' . ": " . ($item['parking'] ? 'Y' : 'N') . "<br>";
-    echo '<strong>Rating</strong>' . ": " . $item['vote'] . "<br>";
-    echo '<strong>Distance</strong>' . ": " . $item['distance_to_center'] . "<br><br>";
-    
-}
-?>
+  
 
-<!-- ---BOOTSTRAP -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- ---BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
